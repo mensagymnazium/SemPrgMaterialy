@@ -1,6 +1,6 @@
 # Object Oriented Programming (OOP)
 
-
+*Pokračujme s přirovnáním, že objekty fungují jako samostatné počítače, které mají svůj vlastní program (třída objektu). Instance je konkrétní běžící počítač, na němž běží program určené třídy. Instance (počítače) komunikují mezi sebou, vědí o sobě skrze laserová ukazovátka (reference) , tj. lze zavolat operaci (metodu) jiného počítače (jiné instance), když mám laserové ukazovátko na cílový počítač (instanci) a cílový počítač mi operaci (metodu) nabízí (public).*
 
 ## Třída vs. instance
 
@@ -29,7 +29,7 @@ Instanci vytvářím zásadně pomocí operátoru `new`, výsledek si uložím d
 
 ## Metody (operace)
 
-Metoda je funkce/operace na třídě, volám ji prostřednictvím třídy.
+Metoda je funkce/operace na třídě, volám ji prostřednictvím třídy (laserového ukazovátka).
 
 ```csharp
 public class HerniPlan
@@ -54,7 +54,7 @@ public void VykresliNaObrazovku()
 
 ### Volání metod
 
-Volání metody "z venku":
+Volání metody "z venku" (laserové ukazovátko):
 
 ```csharp
 // vytvořím novou instanci a zapamtuji si laserové ukazovátko na ní do proměnné "plan"
@@ -63,15 +63,15 @@ var plan = new HerniPlan();
 plan.Vykresli();
 ```
 
-Volání metody "uvnitř" třídy samotné:
+Volání metody "uvnitř" třídy samotné (`this` je ukazovátko sám na sebe, zrcátko :-)):
 
 ```csharp
 public class HerniPlan
 {
     public void DoSomething()
     {
-        Vykresli();
         this.Vykresli();
+        Vykresli(); // this je nepovinné, pokud je zápis jednoznačný i bez něj
     }
 }
 ```
@@ -95,7 +95,7 @@ public class Figurka
 }
 ```
 
-#### Přetěžování metod (overloading) - více definic s různými parametry
+#### (Přetěžování metod (overloading) - více definic s různými parametry)
 
 Stejně jako konstruktor (viz níže), i metoda může být definována vícekrát s různými parametry
 
@@ -113,7 +113,7 @@ public class Hrac
 }
 ```
 
-Podle toho, s jakými parametry metodu volám, taková verze se použije.
+Podle toho, s jakými parametry metodu volám, taková verze se spustí.
 
 ## Vnitřní stav (field, data, atributy)
 
@@ -162,9 +162,9 @@ public class Hrac
 * `public` - přístup odkudkoliv
 * (`protected` - přístup ze stejné třídy a jejích potomků při dědění)
 
-## Konstruktor
+## Konstruktor (constructor)
 
-Metoda, která se volá při vytváření instance ("při spouštění počítače").
+Metoda, která se volá při vytváření instance ("při spouštění počítače s programem dané třídy").
 
 Nemá návratovou hodnotu (neuvádí se ani `void`), jmenuje se stejně jako třída.
 
@@ -228,6 +228,10 @@ Při volání se použije vždy jen jeden z nich (s odpovídajícími parametry)
 var hrac1 = new Hrac("Pepa"); // zavolá se ctor s variantou přijímající pozadovaneJmeno
 var hrac2 = new Hrac(); // vznikne Anonym
 ```
+
+
+
+
 
 
 

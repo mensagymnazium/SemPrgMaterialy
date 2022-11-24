@@ -235,19 +235,101 @@ var hrac2 = new Hrac(); // vznikne Anonym
 
 ## Zapouzdření
 
+Princip, kdy se snažím ochránit vnitřní stav objektu před libovolným nekontrolovaným použitím a zpřístupňuji ho jen skrze povolené operace (public metody, popř. public properties).
+
 
 
 ## Properties (operace, které se tváří jako data)
+
+Speciální metody, které na venek umožňují pracovat s členem třídy, jako by to byl field/proměnná, tj. přiřazení hodnoty a čtení hodnoty.
+
+```csharp
+private string jmeno; // field
+public string Jmeno
+{
+    get
+    {
+        if (jmeno == null)
+        {
+            return "Dosud nepojmenovaný";
+        }
+        return jmeno;
+    }
+    set
+    {
+        if (value == null)
+        {
+            throw new Exception("Jméno nesmí být null");
+        }
+        else
+        {
+        	jmeno = value;
+        }
+    }
+}
+
+// při použití
+hrac.Jmeno = "Pepa"; // podmínkou je set
+var hraci = hrac1.Jmeno + " " + hrac2.Jmeno; // podmínkou je get
+```
+
+Velmi významné procento vypadá takto:
+
+```csharp
+private string jmeno;
+public string Jmeno
+{
+    get { return jmeno; }
+    set { jmeno = value; }
+}
+
+// zkrácený zápis
+public string Jmeno { get; set; }
+```
+
+Není nutné mít set i get, lze i různé modifikátory.
+
+```csharp
+public string Jmeno { get; }
+public string Jmeno { get; private set; }
+// místo set, lze init, pak lze nastavit jen během vytváření instance (contructor + object initializer)
+public string Jmeno { get; init; }
+```
 
 
 
 ## Kompozice (odkazy mezi objekty)
 
+"Laserové ukazovátko mezi objekty", realizuje se fieldy, které ukazují na další instance.
+
+```csharp
+public class Hra
+{
+    private HerniPlan herniPlan;
+    private List<Hrac> hraci;
+}
+```
+
 
 
 ## Dědičnost
 
+Vytvářím novou třídu rozšířením existující třídy o novou funkčnost. Nikdy nemůžu zužovat, vždy rozšiřuji.
 
+Kdekoliv používám předka, mohu použít i potomka, protože ten má minimálně stejné operace (nemůže být zúžen).
+
+```csharp
+public class Predek
+{
+    // definice
+}
+public class Potomek : Predek
+{
+    // rozšiřující definice
+}
+```
+
+Dědit mohu jen z jednoho předka, není vícenásobná dědičnost (interface viz později).
 
 ## Polymorfizmus
 

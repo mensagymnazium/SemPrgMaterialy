@@ -15,17 +15,17 @@ public class HerniPlan
 
 Předpis ("program") třídy tvoří:
 
-* jméno třídy (vč. namespace),
-* metody (operace),
-* data (fieldy, atributy)
+* jméno třídy (součástí plného jména je namespace a další údaje, o tom někdy později),
+* operace (metody),
+* data (fieldy, atributy, hybridem mezi operací a daty jsou properties, viz níže)
 
-Instance objektu je konkrétní spuštěný "počítač" na kterém běží "program" pro konkrétní třídu objektu (např. modrá figurka č. 1, modrá figurka č. 2, hráč Petr, kostka v mojí kapse, ...)
+Instance objektu je konkrétní spuštěný "počítač" na kterém běží "program" pro konkrétní třídu objektu (např. modrá figurka č. 1, modrá figurka č. 2, hráč Petr, hráč Karel, zelená kostka v mojí kapse, ...)
 
 ```csharp
 var plan = new HerniPlan();
 ```
 
-Instanci vytvářím zásadně pomocí operátoru `new`, výsledek si uložím do proměnné (nebo jinam, viz níže).
+Instanci (nový počítač) vytvářím zásadně pomocí operátoru `new` (o konstruktorech níže), výsledek (laserové ukazovátko na instanci) si uložím do proměnné (nebo jinam, viz níže).
 
 ## Metody (operace)
 
@@ -158,9 +158,11 @@ public class Hrac
 
 ### Modifikátory přístupu
 
-* `private` (výchozí) - přístup pouze ze stejné třídy
+Metody, fieldy a další membery se označují modifikátory přístupu:
+
+* `private` (výchozí) - přístup pouze ze stejné třídy (nelze použít zvenku, viz zapouzdření níže)
 * `public` - přístup odkudkoliv
-* (`protected` - přístup ze stejné třídy a jejích potomků při dědění)
+* (a další variace, např.`protected` - přístup ze stejné třídy a jejích potomků při dědění)
 
 ## Konstruktor (constructor)
 
@@ -179,7 +181,7 @@ public class Hrac
 }
 ```
 
-Konstruktor může mít parametry (výhodně tak mohu vynutit zadání vstupních hodnot - nutného stavu)
+Konstruktor může mít parametry (výhodně tak mohu vynutit zadání vstupních hodnot - nutného počátečního stavu)
 
 ```csharp
 puvlic class Hrac
@@ -192,7 +194,7 @@ puvlic class Hrac
 }
 ```
 
-Konstruktor s parametry pak volám:
+Konstruktor s parametry pak volám jako metodu:
 
 ```csharp
 var hrac = new Hrac("Pepa");
@@ -231,19 +233,15 @@ var hrac2 = new Hrac(); // vznikne Anonym
 
 
 
-
-
-
-
-## Kompozice (odkazy mezi objekty)
-
-
-
 ## Zapouzdření
 
 
 
 ## Properties (operace, které se tváří jako data)
+
+
+
+## Kompozice (odkazy mezi objekty)
 
 
 
@@ -255,7 +253,7 @@ var hrac2 = new Hrac(); // vznikne Anonym
 
 
 
-## Statické třidy/membery
+## Statické třídy/membery
 
 
 
